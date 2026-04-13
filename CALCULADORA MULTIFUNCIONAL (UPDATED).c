@@ -68,10 +68,12 @@ int eleccion(int p)
     }
     return x;
 }
+
+
 void cineodina()
 {
     int cinedina,tipodesis,opcion,fins,casoeje,subcaso,caido;
-    long double vcero,xfin,xinicio,yfin,yinicio,vfinal,angin,angf,omega,alfa,acelers,tiempo,vresultante,vinicioy,vfinaly,viniciox,vfinalx;
+    long double vcero,xfin,xinicio,yfin,yinicio,ymax,vfinal,angin,angf,omega,alfa,acelers,tiempo,tiempomax,vresultante,vinicioy,vfinaly,viniciox,vfinalx;
     printf("Quiere trabajar con (1) Cinematica\n(2) Dinamica\n");
     cinedina=eleccion(2);
     if (cinedina==0)
@@ -182,7 +184,7 @@ void cineodina()
                 }
                 else if (casoeje==3)
                 {
-                    printf("\nIngresa el tiempo (segundos): "); scanf("%lf", &tiempo);
+                    printf("\nIngresa el tiempo (segundos) que toma en llegar al suelo: "); scanf("%lf", &tiempo);
                     printf("\nIngresa la magnitud de la velocidad inicial: "); scanf("%lf", &vresultante);
                     printf("\nIngrese el angulo con la horizontal: "); scanf("%lf", &angin);
                     viniciox=cosl(degradoaradian(angin))*vresultante;
@@ -196,16 +198,44 @@ void cineodina()
                     else if(subcaso==1)
                     {
                         printf("\nIngrese la altura inicial: "); scanf("%lf", &yinicio);
-                        yfin=yinicio+vinicio*tiempo+(0.5)*acelers*powl(tiempo,2);
-                        xfin=viniciox*t;
+                        yfin=yinicio+vinicioy*tiempo-(0.5)*acelers*powl(tiempo,2);
+                        xfin=viniciox*tiempo;
+                        vfinalx=viniciox;
+                        vfinaly=vinicioy+acelers*tiempo;
+                        tiempomax=vinicioy/acelers;
+                        if (tiempomax<0) 
+                        {
+                            tiempomax*=-1;
+                        }
+                        ymax=yinicio+(pow(vinicioy,2)/2*acelers);
+                        printf("Recorrio %.2lf metros en eje X y esta en %.2f de altura respecto a su posicion inicial, todo esto en %.2lf segundos",xfin,yfin,tiempo);
+                        if (ymax>0)
+                        {
+                            printf("\nSe demoro %.2lf segundos en llegar a la altura maxima osea %.2lf metros sobre su punto inicial",tiempo,ymax);
+                            break;
+                        }
+                        printf("\nSe demoro %.2lf segundos en llegar a la altura maxima osea %.2lf metros bajo su punto inicial",tiempo,ymax);
+                        break;
+
                     }
                     else if(subcaso==2)
                     {
-                        printf("\nIngrese el angulo con la horizontal: "); scanf("%lf", &angin);
+                        printf("\nIngrese la altura final: "); scanf("%lf", &ymax);
+                        yinicio=yfinal-vinicioy*tiempo-(0.5)*acelers*pow(tiempo,2);
+                        vfinaly=vinicioy-acelers*tiempo;
+                        xfinal=viniciox*tiempo;
+                        tiempomax=vinicioy/acelers;
+                        if (tiempomax<0)
+                        {
+                            tiempomax*=-1;
+                        }
+                        ymax=yinicio+(pow(vinicioy,2)/2*acelers);
+
+
                     }
                     else
                     {
-                        printf("\nIngrese el angulo con la horizontal: "); scanf("%lf", &angin);
+                        printf("\nIngrese la distancia recorrida en X: "); scanf("%lf", &xfin);
                     }
                     
                 }
