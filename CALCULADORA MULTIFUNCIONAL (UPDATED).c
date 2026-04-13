@@ -706,7 +706,7 @@ int main()
             default:
               printf("OPCION INVALIDA\n");
               break;
-        
+        lol;
         }
         printf("Desea hacer otra operacion (1. Si // 2. No): ");
         scanf("%d",&letra);
