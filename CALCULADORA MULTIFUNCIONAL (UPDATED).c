@@ -78,7 +78,6 @@ void cineodina()
     cinedina=eleccion(2);
     if (cinedina==0)
     {
-        
         printf("Ingrese valor valido, por favor\n");
         cineodina();
     }
@@ -185,6 +184,7 @@ void cineodina()
                 }
                 else if (casoeje==3)
                 {
+                    printf("\nIngresa el tiempo (segundos) que toma en llegar al suelo: "); scanf("%lf", &tiempo);
                     printf("\nIngresa la magnitud de la velocidad inicial: "); scanf("%lf", &vresultante);
                     printf("\nIngrese el angulo con la horizontal: "); scanf("%lf", &angin);
                     viniciox=cosl(degradoaradian(angin))*vresultante;
@@ -197,7 +197,6 @@ void cineodina()
                     }
                     else if(subcaso==1)
                     {
-                        printf("\nIngresa el tiempo (segundos) que toma en llegar al suelo: "); scanf("%lf", &tiempo);
                         printf("\nIngrese la altura inicial: "); scanf("%lf", &yinicio);
                         yfin=yinicio+vinicioy*tiempo-(0.5)*acelers*powl(tiempo,2);
                         xfin=viniciox*tiempo;
@@ -221,11 +220,10 @@ void cineodina()
                     }
                     else if(subcaso==2)
                     {
-                        printf("\nIngresa el tiempo (segundos) que toma en llegar al suelo: "); scanf("%lf", &tiempo);
                         printf("\nIngrese la altura final: "); scanf("%lf", &ymax);
                         yinicio=yfinal-vinicioy*tiempo-(0.5)*acelers*pow(tiempo,2);
                         vfinaly=vinicioy+acelers*tiempo;
-                        xfinal=viniciox*tiempo;
+                        xfin=viniciox*tiempo;
                         tiempomax=vinicioy/acelers;
                         if (tiempomax<0)
                         {
@@ -238,6 +236,9 @@ void cineodina()
                     else
                     {
                         printf("\nIngrese la distancia recorrida en X: "); scanf("%lf", &xfin);
+                        tiempo=xfin/viniciox;
+                        vfinaly=vinicioy+acelers*tiempo;
+                        yinicio
                     }
                     
                 }
