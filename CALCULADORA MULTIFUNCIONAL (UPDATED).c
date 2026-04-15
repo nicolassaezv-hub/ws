@@ -83,11 +83,14 @@ void cineodina()
     }
     else if (cinedina==1)
     {
-        printf("Es su caso: (1) Caida Libre\n (2) Movimiento Rectilineo Uniforme\n(3) Movimiento Rectilineo Uniformemente Acelerado\n(4) Movimiento Vertical con lanzamiento hacia arriba\n(5) Movimiento Parabolico (Proyectil)\n");
-        printf("(6) Movimiento Circular Uniforme\n(7) Movimiento Circular Uniformemente Acelerado\n");
+        printf("Es su caso: (1) Caida Libre\n (2) Movimiento Rectilineo Uniforme\n(3) Movimiento Rectilineo Uniformemente Acelerado\n(4) Movimiento Vertical con lanzamiento hacia arriba\n");
+        printf("(5) Movimiento Circular Uniforme\n(6) Movimiento Circular Uniformemente Acelerado\n");
         opcion=eleccion(6);
-        printf("Respecto a la velocidad y aceleracion en el sistema es:\n (1) De velocidad constante\n(2) De aceleracion constante\n");
-        tipodesis=eleccion(2);
+        if (opcion!=1)
+        {
+            printf("Respecto a la velocidad y aceleracion en el sistema es:\n (1) De velocidad constante\n(2) De aceleracion constante\n");
+            tipodesis=eleccion(2);
+        }
         if (opcion==0 || tipodesis==0)
         {
             printf("Ingrese valor valido, por favor vuelva a ingresar su caso\n");
@@ -184,61 +187,37 @@ void cineodina()
                 }
                 else if (casoeje==3)
                 {
-                    printf("\nIngresa el tiempo (segundos) que toma en llegar al suelo: "); scanf("%lf", &tiempo);
                     printf("\nIngresa la magnitud de la velocidad inicial: "); scanf("%lf", &vresultante);
                     printf("\nIngrese el angulo con la horizontal: "); scanf("%lf", &angin);
                     viniciox=cosl(degradoaradian(angin))*vresultante;
                     vinicioy=sinl(degradoaradian(angin))*vresultante;
-                    printf("\nConoce..\n(1) La altura inicial\n(2)Altura final\n(3) La distancia final (en x)\n");
-                    subcaso=eleccion(3);
+                    printf("\nEs su altura inicial...\n(1)Igual a 0\n(2) Distinta de 0\n");
+                    subcaso=eleccion(2);
                     if (subcaso==0)
                     {
                         printf("Ingrese un valor valido la proxima\n");
                     }
-                    else if(subcaso==1)
-                    {
-                        printf("\nIngrese la altura inicial: "); scanf("%lf", &yinicio);
-                        yfin=yinicio+vinicioy*tiempo-(0.5)*acelers*powl(tiempo,2);
-                        xfin=viniciox*tiempo;
-                        vfinalx=viniciox;
-                        vfinaly=vinicioy+acelers*tiempo;
-                        tiempomax=vinicioy/acelers;
-                        if (tiempomax<0) 
-                        {
-                            tiempomax*=-1;
-                        }
-                        ymax=yinicio+(pow(vinicioy,2)/2*acelers);
-                        printf("Recorrio %.2lf metros en eje X y esta en %.2f de altura respecto a su posicion inicial, todo esto en %.2lf segundos",xfin,yfin,tiempo);
-                        if (ymax>0)
-                        {
-                            printf("\nSe demoro %.2lf segundos en llegar a la altura maxima osea %.2lf metros sobre su punto inicial",tiempo,ymax);
-                            break;
-                        }
-                        printf("\nSe demoro %.2lf segundos en llegar a la altura maxima osea %.2lf metros bajo su punto inicial",tiempo,ymax);
-                        break;
-
-                    }
                     else if(subcaso==2)
                     {
-                        printf("\nIngrese la altura final: "); scanf("%lf", &ymax);
-                        yinicio=yfinal-vinicioy*tiempo-(0.5)*acelers*pow(tiempo,2);
-                        vfinaly=vinicioy+acelers*tiempo;
-                        xfin=viniciox*tiempo;
-                        tiempomax=vinicioy/acelers;
-                        if (tiempomax<0)
+                        printf("\nIngrese la altura inicial: "); scanf("%lf", &yinicio);
+                        if (viniciox!=0 && vinicioy==0)
                         {
-                            tiempomax*=-1;
+                            tiempo=sqrtl((2*yinicio)/acelers);
+                            ymax=yinicio;
+                            xfin=viniciox*tiempo;
                         }
-                        ymax=yinicio+(pow(vinicioy,2)/2*acelers);
+                        else if(viniciox!=0 && vinicioy>0)
+                        {
+                            tiempomax=vinicioy/acelers;
+                            ymax=yinicio+(pow(vinicioy,2)/2*acelers);
+                            tiempo=(vinicioy+sqrtl(pow(vinicioy,2)+2*acelers*yinicio))/acelers;
+                            xfin=viniciox*tiempo;
+                        }
+                        else if(viniciox!=0 && vinicioy<0)
+                        {
+                            tiempo=(-vinicioy)+sqrtl(pow(vinicioy,2)+
+                        }
 
-
-                    }
-                    else
-                    {
-                        printf("\nIngrese la distancia recorrida en X: "); scanf("%lf", &xfin);
-                        tiempo=xfin/viniciox;
-                        vfinaly=vinicioy+acelers*tiempo;
-                        yinicio
                     }
                     
                 }
