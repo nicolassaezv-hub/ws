@@ -86,12 +86,10 @@ void cineodina()
         printf("Es su caso: (1) Caida Libre\n (2) Movimiento Rectilineo Uniforme\n(3) Movimiento Rectilineo Uniformemente Acelerado\n(4) Movimiento Vertical con lanzamiento hacia arriba\n");
         printf("(5) Movimiento Circular Uniforme\n(6) Movimiento Circular Uniformemente Acelerado\n");
         opcion=eleccion(6);
-        if (opcion!=1)
+        if (opcion!=1 && opcion!=2 && opcion!=3)
         {
-            printf("Respecto a la velocidad y aceleracion en el sistema es:\n (1) De velocidad constante\n(2) De aceleracion constante\n");
-            tipodesis=eleccion(2);
         }
-        if (opcion==0 || tipodesis==0)
+        if (opcion==0)
         {
             printf("Ingrese valor valido, por favor vuelva a ingresar su caso\n");
             cineodina();
@@ -197,6 +195,38 @@ void cineodina()
                     {
                         printf("Ingrese un valor valido la proxima\n");
                     }
+                    else if (subcaso==1)
+                    {
+                        if (viniciox!=0 && vinicioy==0)
+                        {
+                            ymax=0;
+                            tiempo=0;
+                            xfin=0;
+                        }
+                        else if (viniciox!=0 && vinicioy>0)
+                        {
+                            tiempomax=vinicioy/acelers;
+                            ymax=powl(vinicioy,2)/2*acelers;
+                            tiempo=(2*vinicioy)/acelers;
+                            xfin=viniciox*tiempo
+                        }
+                        else if (viniciox!=0 && vinicioy<0)
+                        {
+                            tiempo=0;
+                            xfin=0;
+                        }
+                        else if (viniciox==0 && vinicioy>0)
+                        {
+                            tiempomax=vinicioy/acelers;
+                            ymax=powl(vinicioy,2)/2*acelers;
+                            tiempo=(2*vinicioy)/acelers;
+                        }
+                        else if (viniciox==0 && vinicioy<0)
+                        {
+                            tiempo=0;
+                            xfin=0;
+                        }
+                    }
                     else if(subcaso==2)
                     {
                         printf("\nIngrese la altura inicial: "); scanf("%lf", &yinicio);
@@ -210,12 +240,23 @@ void cineodina()
                         {
                             tiempomax=vinicioy/acelers;
                             ymax=yinicio+(pow(vinicioy,2)/2*acelers);
-                            tiempo=(vinicioy+sqrtl(pow(vinicioy,2)+2*acelers*yinicio))/acelers;
+                            tiempo=(vinicioy+sqrtl(powl(vinicioy,2)+2*acelers*yinicio))/acelers;
                             xfin=viniciox*tiempo;
                         }
                         else if(viniciox!=0 && vinicioy<0)
                         {
-                            tiempo=(-vinicioy)+sqrtl(pow(vinicioy,2)+
+                            tiempo=(-vinicioy)+sqrtl(powl(vinicioy,2)+2*acelers*yinicio);
+                            xfin=viniciox*tiempo;
+                        }
+                        else if(viniciox==0 && vinicioy>0)
+                        {
+                            tiempomax=vinicioy/acelers;
+                            ymax=yinicio+(pow(vinicioy,2)/2*acelers);
+                            tiempo=(vinicioy+sqrtl(powl(vinicioy,2)+2*acelers*yinicio))/acelers;
+                        }
+                        else if(viniciox==0 && vinicioy<0)
+                        {
+                            tiempo=(-vinicioy)+sqrtl(powl(vinicioy,2)+2*acelers*yinicio);
                         }
 
                     }
@@ -232,65 +273,49 @@ void cineodina()
               }
               break;
             case (2):
-              if (tipodesis==1)
-              else
-              {
-    
-              }
+              acelers=0;
+              printf("Reconoce...(1) Velocidad\n(2) Tiempo\n(3) Posicion\n");
+              
             case (3):
-              if (tipodesis==1)
-              else
-              {
-
-              }
+              
             case (4):
-              if (tipodesis==1)
-              {
-
-              }
-              else
-              {
-
-              } 
+              
+              
             case (5):
-              if (tipodesis==1)
-              {
-
-              }
-              else
-              {
-
-              }
+              
             case (6):
             
-              if (tipodesis==1)
-              {
-
-              }
-              else
-              {
-
-              }
             case (7):
             
-              if (tipodesis==1)
-              {
-
-              }
-              else
-              {
-
-              }
             default:
               break;
         }
     }
     else
     {
-        printf("Es su caso:\n(1) Caida Libre\n(2) Equilibrio Estatico\n(3) Movimiento circular\n(4)Movimiento con aceleracion constante");
+        printf("Es su caso:\n(1) Movimiento Acelerado en Plano (horizontal,vertical o inclinado)\n(2) Equilibrio Estatico\n(3) Movimiento circular\n(4) Movimiento circular con aceleracion constante\n");
         opcion=eleccion(4);
-        printf("Respecto a la velocidad y aceleracion en el sistema es:\n (1) De velocidad constante\n(2) De aceleracion constante\n");
-        tipodesis=eleccion(2);
+        if (opcion==0)
+        {
+            printf("Ingrese un valor valido la proxima\n");
+        }
+        printf("De cuantos cuerpos se compone su sistema?\n");
+        scanf("%d",&subcaso);
+        else
+        {
+            switch (opcion)
+            {
+                case (1):
+                  printf("De cuantos cuerpos se compone su sistema")
+                case (2):
+                  h
+                case (3):
+                  h
+                case (4):
+                  h
+                break;
+            }
+        }
 
     }
 
@@ -522,6 +547,60 @@ void definconicas()
 }
 void regresl()
 {
+    limpiarPantalla();
+    int caso,subcaso,x,y,cantdatos;
+    long double sumatx,sumaty,promx,promy,cov=0,varianz = 0,buno,b;
+    printf("Ingrese el largo de sus datos: \n");
+    scanf("%d",&cantdatos);
+    if (cantdatos<=0)
+    {
+        printf("INGRESE VALOR VALIDO");
+        regresl();
+    }
+    long double matriz[cantdatos][cantdatos];
+    for (int i=0;i<cantdatos;i++)
+    {
+        for (int j=0;j<2;j++)
+        {
+            if (j==0)
+            {
+                printf("\nIngrese el valor x%d:",i+1);
+            }
+            else
+            {
+                printf("\nIngrese el valor y%d:",i+1);
+            }
+            scanf("%lf",&matriz[i][j]);
+            if (j==0)
+            {
+                sumatx+=matriz[i][j];
+            }
+            else
+            {
+                sumaty+=matriz[i][j];
+            }
+        }
+    }
+    printf("Sus datos en matriz quedan expresadas como\n");
+    for (int i=0;i<cantdatos;i++)
+    {
+        printf("%[ ");
+        for (int j=0;j<2;j++)
+        {
+            printf("%.2lf ",matriz[i][j]);
+        }
+        printf(" ]\n");
+    }
+    promx=sumatx/cantdatos;
+    promy=sumaty/cantdatos;
+    for (int i=0;i<cantdatos;i++)
+    {
+        cov+=(matriz[i][0]-promx)*(matriz[i][1]-promy);
+        varianz+=powl(matriz[i][0]-promx,2);
+    }
+    cov=cov/cantdatos;
+    varianz=varianz/cantdatos;
+    buno=cov/varianz;
 
 }
 void tendisp()
@@ -718,7 +797,6 @@ int main()
             default:
               printf("OPCION INVALIDA\n");
               break;
-        lol;
         }
         printf("Desea hacer otra operacion (1. Si // 2. No): ");
         scanf("%d",&letra);
@@ -731,6 +809,10 @@ int main()
     }
     return 0;
 }
+
+
+
+
 /*MASS EFFECT 3
 DOOM 3
 FINAL FANTASY X-0
