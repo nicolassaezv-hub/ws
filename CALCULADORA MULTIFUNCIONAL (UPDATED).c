@@ -543,13 +543,12 @@ void definconicas()
           definconicas();
           break;
     }
-    
 }
 void regresl()
 {
     limpiarPantalla();
     int caso,subcaso,x,y,cantdatos;
-    long double sumatx,sumaty,promx,promy,cov=0,varianz = 0,buno,b;
+    long double sumatx=0,sumaty=0,promx,sumatmix=0,sumatxcuad=0,promy,buno,bcero;
     printf("Ingrese el largo de sus datos: \n");
     scanf("%d",&cantdatos);
     if (cantdatos<=0)
@@ -574,12 +573,13 @@ void regresl()
             if (j==0)
             {
                 sumatx+=matriz[i][j];
+                sumatxcuad=powl(matriz[i][j],2);
             }
             else
             {
                 sumaty+=matriz[i][j];
+                sumatmix+=matriz[i][j]*matriz[i][0];
             }
-        }
     }
     printf("Sus datos en matriz quedan expresadas como\n");
     for (int i=0;i<cantdatos;i++)
@@ -593,19 +593,17 @@ void regresl()
     }
     promx=sumatx/cantdatos;
     promy=sumaty/cantdatos;
-    for (int i=0;i<cantdatos;i++)
-    {
-        cov+=(matriz[i][0]-promx)*(matriz[i][1]-promy);
-        varianz+=powl(matriz[i][0]-promx,2);
-    }
-    cov=cov/cantdatos;
-    varianz=varianz/cantdatos;
-    buno=cov/varianz;
+    buno=((cantdatos*sumatmix)-sumatx*sumaty)/(cantdatos*sumatxcuad-(powl(sumatx,2)));
+    bcero=promy-buno*promx;
+    printf("Su promedio en X es %.2lf\nSu promedio en Y es %.2lf\nLa pendiente es %.2lf\nEl intercepto es %.2lf\n",promx,promy,buno,bcero);
+    printf("Su regresion lineal simple expresada queda como: Y=%.2lf+%.2lfx",bcero,buno);
 
 }
 void tendisp()
 {
-
+    int cantdatos;
+    long double promx,mediano,moda;
+    printf("Cuantos datos desea ingresar?")
 }
 void calculofalt(char a, char v)
 {
@@ -813,15 +811,5 @@ int main()
 
 
 
-/*MASS EFFECT 3
-DOOM 3
-FINAL FANTASY X-0
-FINAL FANTASY PIXEL REMASTER
-ATOMIC HEART
-PERSONA 5 ROYAL
-PERSONA 4 GOLDEN
-PERSONA 3 RELOAD
-
-
-
+/*
 */
