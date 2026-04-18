@@ -68,7 +68,7 @@ int eleccion(int p)
     }
     return x;
 }
-
+long double 
 
 void cineodina()
 {
@@ -86,9 +86,6 @@ void cineodina()
         printf("Es su caso: (1) Caida Libre\n (2) Movimiento Rectilineo Uniforme\n(3) Movimiento Rectilineo Uniformemente Acelerado\n(4) Movimiento Vertical con lanzamiento hacia arriba\n");
         printf("(5) Movimiento Circular Uniforme\n(6) Movimiento Circular Uniformemente Acelerado\n");
         opcion=eleccion(6);
-        if (opcion!=1 && opcion!=2 && opcion!=3)
-        {
-        }
         if (opcion==0)
         {
             printf("Ingrese valor valido, por favor vuelva a ingresar su caso\n");
@@ -293,20 +290,22 @@ void cineodina()
     }
     else
     {
-        printf("Es su caso:\n(1) Movimiento Acelerado en Plano (horizontal,vertical o inclinado)\n(2) Equilibrio Estatico\n(3) Movimiento circular\n(4) Movimiento circular con aceleracion constante\n");
+        printf("Es su caso:\n(1) Movimiento Acelerado en Plano (horizontal)\n(2) Equilibrio Estatico en Plano Horizontal\n(3) Movimiento circular\n");
         opcion=eleccion(4);
         if (opcion==0)
         {
             printf("Ingrese un valor valido la proxima\n");
         }
+        
         printf("De cuantos cuerpos se compone su sistema?\n");
-        scanf("%d",&subcaso);
+        scanf("%d",&subcaso); //CANT DE CUERPOS DE UN SISTEMA
+        long double cuerpos[subcaso],trabajo[subcaso];
         else
         {
             switch (opcion)
             {
                 case (1):
-                  printf("De cuantos cuerpos se compone su sistema")
+                  printf("De cuantos cuerpos se compone su sistema");
                 case (2):
                   h
                 case (3):
@@ -602,8 +601,38 @@ void regresl()
 void tendisp()
 {
     int cantdatos;
-    long double promx,mediano,moda;
-    printf("Cuantos datos desea ingresar?")
+    long double promx=0,mediano,moda;
+    printf("Cuantos datos desea ingresar?: ");
+    scanf("%d",&cantdatos);
+    long double vector[cantdatos],copia[cantdatos];
+    for (int i=0;i<cantdatos;i++)
+    {
+        scanf("%lf",&vector[i]);
+        promx+=vector[i];
+    }
+    promx=promx/cantdatos;
+    copia=vector;
+    for(i = 0; i < n - 1; i++) 
+    {
+        for(j = 0; j < n - i - 1; j++) 
+        {
+            if(copia[j] > copia[j + 1])
+            {
+                temp = copia[j];
+                copia[j] = copia[j + 1];
+                copia[j + 1] = temp;
+            }
+        }
+    }
+    if (cantdatos%2==0)
+    {
+        mediana=(copia[(cantdatos/2) - 1] + copia[cantdatos/2]) / 2.0;
+    }
+    else
+    {
+        mediana = copia[cantdatos/2];
+    }
+    printf("El promedio de los datos es %.2lf\nLa mediana es de %.2lf",promx,mediana);
 }
 void calculofalt(char a, char v)
 {
