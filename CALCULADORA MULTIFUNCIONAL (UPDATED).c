@@ -297,15 +297,55 @@ void cineodina()
             printf("Ingrese un valor valido la proxima\n");
         }
         
-        printf("De cuantos cuerpos se compone su sistema?\n");
-        scanf("%d",&subcaso); //CANT DE CUERPOS DE UN SISTEMA
-        long double cuerpos[subcaso],trabajo[subcaso];
+        printf("La aceleracion de su sistema es hacia\n(1) La izquierda\n (2) La derecha\n");
+        subcaso=eleccion(2);
+        if (subcaso==0)
+        {
+            printf("Ingrese un valor valido la proxima\n");
+        }
         else
         {
+            printf("De cuantos cuerpos se compone su sistema?: "); //CANT DE CUERPOS DE UN SISTEMA
+            scanf("%d",&cantsis);
             switch (opcion)
             {
                 case (1):
-                  printf("De cuantos cuerpos se compone su sistema");
+                  int largoiz,largode;
+                  printf("De cuantos cuerpos se compone su sistema?: "); //CANT DE CUERPOS DE UN SISTEMA
+                  scanf("%d",&cantsis);
+                  if (cantsis<=0)
+                  {
+                    printf("Ingrese un valor valido la proxima");
+                  }
+                  for (int k=0;k<cantsis;k++)
+                  {
+                    printf("Cuantas fuerzas estan presente hacia la izquierda (segun su DCL)");
+                    scanf("%d",&largoiz);
+                    long double *izq=malloc(largoiz*sizeof(long double));
+                    if (izq==NULL)
+                    {
+                        printf("ERROR DE MEMORIA\n");
+                        exit(EXIT_FAILURE);
+                    }
+                    for (int i=0;i<largoiz;i++)
+                    {
+                        
+                    }
+                    printf("Cuantas fuerzas estan presente hacia la derecha (segun su DCL)");
+                    scanf("%d",largode);
+                    long double *der=malloc(largode*sizeof(long double));
+                    if (der==NULL)
+                    {
+                        printf("ERROR DE MEMORIA\n");
+                        exit(EXIT_FAILURE);
+                    }
+                    for (int i=0;i<largode;i++)
+                    {
+                        
+                    }
+                    
+                  }
+                  break;
                 case (2):
                   h
                 case (3):
