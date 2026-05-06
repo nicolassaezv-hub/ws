@@ -113,19 +113,19 @@ void cineodina()
                     {
                         printf("Ingrese un valor valido la proxima\n");
                     }
-                    printf("\nIngresa el tiempo (segundos): "); scanf("%lf", &tiempo);
-                    printf("\nIngresa la velocidad cero (m/s): "); scanf("%lf", &vcero);
+                    printf("\nIngresa el tiempo (segundos): "); scanf("%Lf", &tiempo);
+                    printf("\nIngresa la velocidad cero (m/s): "); scanf("%Lf", &vcero);
                     else if(subcaso==1)
                     {
-                        printf("\nIngresa la distancia final (en metros): "); scanf("%lf", &xfin);
+                        printf("\nIngresa la distancia final (en metros): "); scanf("%Lf", &xfin);
                         xinicio=xfin-(vcero*tiempo);
-                        printf("\nEn el eje X su distancia inicial es %.2lf\n",xinicio);
+                        printf("\nEn el eje X su distancia inicial es %.2Lf\n",xinicio);
                     }
                     else
                     {
                         printf("Ingresa la distancia inicial (en metros): "); scanf("%lf", &xinicio);
                         xfin=xinicio-(vcero*tiempo);
-                        printf("\nBasado en tus datos, la distancia final es %.2lf\n",xfin);
+                        printf("\nBasado en tus datos, la distancia final es %.2Lf\n",xfin);
                     }
                 }
                 else if(casoeje==2)
@@ -142,48 +142,48 @@ void cineodina()
                     {
                         printf("Ingrese un valor valido la proxima\n");
                     }
-                    printf("\nIngresa el tiempo: "); scanf("%lf", &tiempo);
-                    else if(subcaso==1 && caido==1)
+                    printf("\nIngresa el tiempo: "); scanf("%Lf", &tiempo);
+                    if(subcaso==1 && caido==1)
                     {
-                        printf("\nIngresa la velocidad inicial: "); scanf("%lf", &vcero);
-                        printf("\nIngresa la altura final (en metros): "); scanf("%lf", &yfin);
-                        yinicio=yfin+(acelers*1/2)*powl(tiempo,2)-vcero*tiempo;
+                        printf("\nIngresa la velocidad inicial: "); scanf("%Lf", &vcero);
+                        printf("\nIngresa la altura final (en metros): "); scanf("%Lf", &yfin);
+                        yinicio=yfin+(acelers*0.5)*powl(tiempo,2)-vcero*tiempo;
                         vfinal=vcero-(acelers*tiempo);
-                        printf("La velocidad final es de %.2lf m/s",vfinal);
-                        printf("La posicion inicial es de %.2lf metros",yinicio);
+                        printf("La velocidad final es de %.2Lf m/s",vfinal);
+                        printf("La posicion inicial es de %.2Lf metros",yinicio);
                     }
                     else if (subcaso==1 && caido==2)
                     {
-                        printf("\nIngresa la velocidad inicial: "); scanf("%lf", &vcero);
-                        printf("\nIngresa la altura inicial: "); scanf("%lf", &yinicio);
-                        yfin=yinicio+vcero*tiempo-(1/2)*acelers*powl(tiempo,2);
+                        printf("\nIngresa la velocidad inicial: "); scanf("%Lf", &vcero);
+                        printf("\nIngresa la altura inicial: "); scanf("%Lf", &yinicio);
+                        yfin=yinicio+vcero*tiempo-(0.5)*acelers*powl(tiempo,2);
                         vfinal=vcero-acelers*tiempo;
-                        printf("La velocidad final es de %.2lf m/s\n",vfinal);
-                        printf("La posicion final es de %.2lf metros\n",yfin);
+                        printf("La velocidad final es de %.2Lf m/s\n",vfinal);
+                        printf("La posicion final es de %.2Lf metros\n",yfin);
                     }
-                    else if (subcaso==2 && subcaso==1)
+                    else if (subcaso==2 && caido==1)
                     {
-                        printf("\nIngresa la velocidad final: "); scanf("%lf", &vfinal);
-                        printf("\nIngresa la altura final: "); scanf("%lf", &yfin);
+                        printf("\nIngresa la velocidad final: "); scanf("%Lf", &vfinal);
+                        printf("\nIngresa la altura final: "); scanf("%Lf", &yfin);
                         vcero=vfinal-acelers*tiempo;
-                        yinicio=yfin-vcero*tiempo+(1/2*(acelers))*powl(tiempo,2);
-                        printf("La velocidad inicial es : %.2lf",vcero);
-                        printf("La altura inicial es : %.2lf",yinicio);
+                        yinicio=yfin-vcero*tiempo+(0.5*(acelers))*powl(tiempo,2);
+                        printf("La velocidad inicial es : %.2Lf",vcero);
+                        printf("La altura inicial es : %.2Lf",yinicio);
                     }
                     else
                     {
-                        printf("\nIngresa la velocidad final: "); scanf("%lf", &vfinal);
-                        printf("\nIngresa la altura inicial: "); scanf("%lf", &yinicio);
+                        printf("\nIngresa la velocidad final: "); scanf("%Lf", &vfinal);
+                        printf("\nIngresa la altura inicial: "); scanf("%Lf", &yinicio);
                         vcero=vfinal-acelers*tiempo;
-                        yfin=yinicio+vcero*tiempo-(1/2)*acelers*powl(tiempo,2);
-                        printf("La velocidad inicial es : %.2lf",vcero);
-                        printf("La altura inicial es : %.2lf",yinicio);
+                        yfin=yinicio+vcero*tiempo-(0.5)*acelers*powl(tiempo,2);
+                        printf("La velocidad inicial es : %.2Lf",vcero);
+                        printf("La altura inicial es : %.2Lf",yinicio);
                     }
                 }
                 else if (casoeje==3)
                 {
-                    printf("\nIngresa la magnitud de la velocidad inicial: "); scanf("%lf", &vresultante);
-                    printf("\nIngrese el angulo con la horizontal: "); scanf("%lf", &angin);
+                    printf("\nIngresa la magnitud de la velocidad inicial: "); scanf("%Lf", &vresultante);
+                    printf("\nIngrese el angulo con la horizontal: "); scanf("%Lf", &angin);
                     viniciox=cosl(degradoaradian(angin))*vresultante;
                     vinicioy=sinl(degradoaradian(angin))*vresultante;
                     printf("\nEs su altura inicial...\n(1)Igual a 0\n(2) Distinta de 0\n");
@@ -203,9 +203,9 @@ void cineodina()
                         else if (viniciox!=0 && vinicioy>0)
                         {
                             tiempomax=vinicioy/acelers;
-                            ymax=powl(vinicioy,2)/2*acelers;
+                            ymax=powl(vinicioy,2)/(2*acelers);
                             tiempo=(2*vinicioy)/acelers;
-                            xfin=viniciox*tiempo
+                            xfin=viniciox*tiempo;
                         }
                         else if (viniciox!=0 && vinicioy<0)
                         {
@@ -215,7 +215,7 @@ void cineodina()
                         else if (viniciox==0 && vinicioy>0)
                         {
                             tiempomax=vinicioy/acelers;
-                            ymax=powl(vinicioy,2)/2*acelers;
+                            ymax=powl(vinicioy,2)/(2*acelers);
                             tiempo=(2*vinicioy)/acelers;
                         }
                         else if (viniciox==0 && vinicioy<0)
@@ -226,7 +226,7 @@ void cineodina()
                     }
                     else if(subcaso==2)
                     {
-                        printf("\nIngrese la altura inicial: "); scanf("%lf", &yinicio);
+                        printf("\nIngrese la altura inicial: "); scanf("%Lf", &yinicio);
                         if (viniciox!=0 && vinicioy==0)
                         {
                             tiempo=sqrtl((2*yinicio)/acelers);
@@ -236,19 +236,19 @@ void cineodina()
                         else if(viniciox!=0 && vinicioy>0)
                         {
                             tiempomax=vinicioy/acelers;
-                            ymax=yinicio+(pow(vinicioy,2)/2*acelers);
+                            ymax=yinicio+(pow(vinicioy,2)/(2*acelers));
                             tiempo=(vinicioy+sqrtl(powl(vinicioy,2)+2*acelers*yinicio))/acelers;
                             xfin=viniciox*tiempo;
                         }
                         else if(viniciox!=0 && vinicioy<0)
                         {
-                            tiempo=(-vinicioy)+sqrtl(powl(vinicioy,2)+2*acelers*yinicio);
+                            tiempo=(-vinicioy)+sqrtl(powl(vinicioy,2)+2*acelers*yinicio)/acelers;
                             xfin=viniciox*tiempo;
                         }
                         else if(viniciox==0 && vinicioy>0)
                         {
                             tiempomax=vinicioy/acelers;
-                            ymax=yinicio+(pow(vinicioy,2)/2*acelers);
+                            ymax=yinicio+(pow(vinicioy,2)/(2*acelers));
                             tiempo=(vinicioy+sqrtl(powl(vinicioy,2)+2*acelers*yinicio))/acelers;
                         }
                         else if(viniciox==0 && vinicioy<0)
@@ -727,9 +727,16 @@ void ingresacuadratica(int entrada)
         }
         else
         {
-            x1=(-b+sqrt(interior))/(2*a);
-            x2=(-b-sqrt(interior))/(2*a);
-            printf("Los valores de su X son %.2Lf y %.2Lf\n", x1,x2);
+            if (interior<0)
+            {
+                printf("No hay valores para X con tal que su ecuacion de 0\n");
+            }
+            else
+            {
+                x1=(-b+sqrt(interior))/(2*a);
+                x2=(-b-sqrt(interior))/(2*a);
+                printf("Los valores de su X son %.2Lf y %.2Lf\n", x1,x2);
+            }
         }
     }
 }
@@ -837,7 +844,9 @@ int main()
         opcion=eleccion(8);
         if (opcion==1 || opcion==2)
         {
-            ingresacuadratica(opcion);
+            printf("Desea...\n(1) Resolver su cuadratica con un valor para X\n(2) Encontrar soluciones de X\n");
+            letra=eleccion(2);
+            ingresacuadratica(letra);
         }
         switch (opcion)
         {
