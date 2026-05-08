@@ -3,6 +3,417 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+   SistemaFisico nuevoSistema;
+
+    printf("\n========================\n");
+    printf("TIPO DE MOVIMIENTO\n");
+    printf("========================\n");
+
+    printf("(1) Dinamica Horizontal\n");
+    printf("(2) MRU\n");
+    printf("(3) MRUA\n");
+    printf("(4) Movimiento Circular\n");
+
+    scanf("%d", (int*)&nuevoSistema.tipo);
+
+    getchar();
+
+    switch(nuevoSistema.tipo)
+    {
+
+        /* =====================================
+           DINAMICA
+        ===================================== */
+
+        case DINAMICA:
+
+            printf("\nCantidad de fuerzas izquierda: ");
+
+            scanf("%d",
+                   &nuevoSistema.cantIzq);
+
+            nuevoSistema.izquierda =
+                malloc(
+                    nuevoSistema.cantIzq
+                    * sizeof(Fuerza)
+                );
+
+            if(nuevoSistema.izquierda == NULL)
+            {
+                printf("Error de memoria\n");
+                return;
+            }
+
+            getchar();
+
+            for(int i = 0;
+                i < nuevoSistema.cantIzq;
+                i++)
+            {
+                printf(
+                    "\nFuerza izquierda #%d\n",
+                    i+1
+                );
+
+                printf("Nombre: ");
+
+                fgets(
+                    nuevoSistema
+                    .izquierda[i]
+                    .nombre,
+                    50,
+                    stdin
+                );
+
+                nuevoSistema
+                .izquierda[i]
+                .nombre[
+                    strcspn(
+                        nuevoSistema
+                        .izquierda[i]
+                        .nombre,
+                        "\n"
+                    )
+                ] = '\0';
+
+                printf("(1) Conocida\n");
+                printf("(2) Incognita\n");
+
+                scanf(
+                    "%d",
+                    &nuevoSistema
+                    .izquierda[i]
+                    .conocida
+                );
+
+                getchar();
+
+                if(
+                    nuevoSistema
+                    .izquierda[i]
+                    .conocida == 1
+                )
+                {
+                    printf("Valor (N): ");
+
+                    scanf(
+                        "%Lf",
+                        &nuevoSistema
+                        .izquierda[i]
+                        .valor
+                    );
+
+                    getchar();
+
+                    strcpy(
+                        nuevoSistema
+                        .izquierda[i]
+                        .simbolo,
+                        ""
+                    );
+                }
+                else
+                {
+                    printf("Simbolo: ");
+
+                    fgets(
+                        nuevoSistema
+                        .izquierda[i]
+                        .simbolo,
+                        20,
+                        stdin
+                    );
+
+                    nuevoSistema
+                    .izquierda[i]
+                    .simbolo[
+                        strcspn(
+                            nuevoSistema
+                            .izquierda[i]
+                            .simbolo,
+                            "\n"
+                        )
+                    ] = '\0';
+
+                    nuevoSistema
+                    .izquierda[i]
+                    .valor = 0;
+                }
+            }
+
+            printf("\nCantidad de fuerzas derecha: ");
+
+            scanf(
+                "%d",
+                &nuevoSistema.cantDer
+            );
+
+            nuevoSistema.derecha =
+                malloc(
+                    nuevoSistema.cantDer
+                    * sizeof(Fuerza)
+                );
+
+            if(nuevoSistema.derecha == NULL)
+            {
+                printf("Error de memoria\n");
+
+                free(
+                    nuevoSistema.izquierda
+                );
+
+                return;
+            }
+
+            getchar();
+
+            for(int i = 0;
+                i < nuevoSistema.cantDer;
+                i++)
+            {
+                printf(
+                    "\nFuerza derecha #%d\n",
+                    i+1
+                );
+
+                printf("Nombre: ");
+
+                fgets(
+                    nuevoSistema
+                    .derecha[i]
+                    .nombre,
+                    50,
+                    stdin
+                );
+
+                nuevoSistema
+                .derecha[i]
+                .nombre[
+                    strcspn(
+                        nuevoSistema
+                        .derecha[i]
+                        .nombre,
+                        "\n"
+                    )
+                ] = '\0';
+
+                printf("(1) Conocida\n");
+                printf("(2) Incognita\n");
+
+                scanf(
+                    "%d",
+                    &nuevoSistema
+                    .derecha[i]
+                    .conocida
+                );
+
+                getchar();
+
+                if(
+                    nuevoSistema
+                    .derecha[i]
+                    .conocida == 1
+                )
+                {
+                    printf("Valor (N): ");
+
+                    scanf(
+                        "%Lf",
+                        &nuevoSistema
+                        .derecha[i]
+                        .valor
+                    );
+
+                    getchar();
+
+                    strcpy(
+                        nuevoSistema
+                        .derecha[i]
+                        .simbolo,
+                        ""
+                    );
+                }
+                else
+                {
+                    printf("Simbolo: ");
+
+                    fgets(
+                        nuevoSistema
+                        .derecha[i]
+                        .simbolo,
+                        20,
+                        stdin
+                    );
+
+                    nuevoSistema
+                    .derecha[i]
+                    .simbolo[
+                        strcspn(
+                            nuevoSistema
+                            .derecha[i]
+                            .simbolo,
+                            "\n"
+                        )
+                    ] = '\0';
+
+                    nuevoSistema
+                    .derecha[i]
+                    .valor = 0;
+                }
+            }
+
+            break;
+
+        /* =====================================
+           MRU
+        ===================================== */
+
+        case MRU:
+
+            printf("\nVelocidad: ");
+
+            scanf(
+                "%Lf",
+                &nuevoSistema.velocidadInicial
+            );
+
+            printf("Tiempo: ");
+
+            scanf(
+                "%Lf",
+                &nuevoSistema.tiempo
+            );
+
+            nuevoSistema.distancia =
+                nuevoSistema.velocidadInicial
+                *
+                nuevoSistema.tiempo;
+
+            break;
+
+        /* =====================================
+           MRUA
+        ===================================== */
+
+        case MRUA:
+
+            printf("\nVelocidad inicial: ");
+
+            scanf(
+                "%Lf",
+                &nuevoSistema.velocidadInicial
+            );
+
+            printf("Aceleracion: ");
+
+            scanf(
+                "%Lf",
+                &nuevoSistema.aceleracion
+            );
+
+            printf("Tiempo: ");
+
+            scanf(
+                "%Lf",
+                &nuevoSistema.tiempo
+            );
+
+            nuevoSistema.distancia =
+                nuevoSistema.velocidadInicial
+                *
+                nuevoSistema.tiempo
+                +
+                0.5
+                *
+                nuevoSistema.aceleracion
+                *
+                nuevoSistema.tiempo
+                *
+                nuevoSistema.tiempo;
+
+            nuevoSistema.velocidadFinal =
+                nuevoSistema.velocidadInicial
+                +
+                nuevoSistema.aceleracion
+                *
+                nuevoSistema.tiempo;
+
+            break;
+
+        /* =====================================
+           MOVIMIENTO CIRCULAR
+        ===================================== */
+
+        case MOV_CIRCULAR:
+
+            printf("\nRadio: ");
+
+            scanf(
+                "%Lf",
+                &nuevoSistema.radio
+            );
+
+            printf("Omega: ");
+
+            scanf(
+                "%Lf",
+                &nuevoSistema.omega
+            );
+
+            nuevoSistema.velocidadTangencial =
+                nuevoSistema.radio
+                *
+                nuevoSistema.omega;
+
+            nuevoSistema.aceleracionCentripeta =
+                (
+                    nuevoSistema
+                    .velocidadTangencial
+                    *
+                    nuevoSistema
+                    .velocidadTangencial
+                )
+                /
+                nuevoSistema.radio;
+
+            break;
+
+        default:
+
+            printf("Opcion invalida\n");
+
+            return;
+    }
+
+    /* =====================================
+       GUARDAR EN HISTORIAL
+    ===================================== */
+
+    SistemaFisico *temp =
+        realloc(
+            historial,
+            (cantidadSistemas + 1)
+            *
+            sizeof(SistemaFisico)
+        );
+
+    if(temp == NULL)
+    {
+        printf("Error de memoria\n");
+
+        return;
+    }
+
+    historial = temp;
+
+    historial[cantidadSistemas] =
+        nuevoSistema;
+
+    cantidadSistemas++;
+
+    printf("\nSistema guardado correctamente.\n");
+}
+
 */
 typedef struct
 {
