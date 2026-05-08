@@ -3,6 +3,59 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+*/
+typedef struct
+{
+    TipoMovimiento tipo;
+
+    /* ==========================
+       DINAMICA HORIZONTAL
+    ========================== */
+
+    Fuerza *izquierda;
+    Fuerza *derecha;
+
+    int cantIzq;
+    int cantDer;
+
+    /* ==========================
+       MRU / MRUA
+    ========================== */
+
+    long double posicionInicial;
+    long double posicionFinal;
+
+    long double velocidadInicial;
+    long double velocidadFinal;
+
+    long double aceleracion;
+
+    long double tiempo;
+
+    /* ==========================
+       MOVIMIENTO CIRCULAR
+    ========================== */
+
+    long double radio;
+
+    long double omega;
+
+    long double alfa;
+
+    long double velocidadTangencial;
+
+    long double aceleracionCentripeta;
+
+} SistemaFisico;
+
+/* =====================================
+   HISTORIAL GLOBAL
+===================================== */
+
+SistemaFisico *historial = NULL;
+
+int cantidadSistemas = 0;
+*/
 #define PI 3.141592653589793238462643383279502884L
 void limpiarPantalla() {
 #ifdef _WIN32
