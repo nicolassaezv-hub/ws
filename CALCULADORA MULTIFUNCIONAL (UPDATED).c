@@ -19,7 +19,10 @@ typedef struct {
     long double numero; // campo numerico
     char *texto;        // string dinamico
 } Datos;
-
+typedef struct
+{
+    char nombre[25];
+}
 void poblarstruct(Datos *d, long double valor, int opcion, int subcaso) 
 {
     d->numero = valor; // guardar el numero
@@ -99,6 +102,7 @@ void cineodina()
               if (fins==0)
               {
                 printf("Ingrese un valor valido la proxima\n");
+                return;
               }
               acelers=9.8;
               else if(fins==1)
@@ -112,10 +116,12 @@ void cineodina()
                     if (subcaso==0)
                     {
                         printf("Ingrese un valor valido la proxima\n");
+                        return;
                     }
-                    printf("\nIngresa el tiempo (segundos): "); scanf("%Lf", &tiempo);
+                    printf("\nIngresa el tiempo (segundos): "); 
+                    scanf("%Lf", &tiempo);
                     printf("\nIngresa la velocidad cero (m/s): "); scanf("%Lf", &vcero);
-                    else if(subcaso==1)
+                    if(subcaso==1)
                     {
                         printf("\nIngresa la distancia final (en metros): "); scanf("%Lf", &xfin);
                         xinicio=xfin-(vcero*tiempo);
@@ -123,7 +129,7 @@ void cineodina()
                     }
                     else
                     {
-                        printf("Ingresa la distancia inicial (en metros): "); scanf("%lf", &xinicio);
+                        printf("Ingresa la distancia inicial (en metros): "); scanf("%Lf", &xinicio);
                         xfin=xinicio-(vcero*tiempo);
                         printf("\nBasado en tus datos, la distancia final es %.2Lf\n",xfin);
                     }
@@ -236,7 +242,7 @@ void cineodina()
                         else if(viniciox!=0 && vinicioy>0)
                         {
                             tiempomax=vinicioy/acelers;
-                            ymax=yinicio+(pow(vinicioy,2)/(2*acelers));
+                            ymax=yinicio+(powl(vinicioy,2)/(2*acelers));
                             tiempo=(vinicioy+sqrtl(powl(vinicioy,2)+2*acelers*yinicio))/acelers;
                             xfin=viniciox*tiempo;
                         }
@@ -248,7 +254,7 @@ void cineodina()
                         else if(viniciox==0 && vinicioy>0)
                         {
                             tiempomax=vinicioy/acelers;
-                            ymax=yinicio+(pow(vinicioy,2)/(2*acelers));
+                            ymax=yinicio+(powl(vinicioy,2)/(2*acelers));
                             tiempo=(vinicioy+sqrtl(powl(vinicioy,2)+2*acelers*yinicio))/acelers;
                         }
                         else if(viniciox==0 && vinicioy<0)
@@ -305,44 +311,41 @@ void cineodina()
         }
         else
         {
-            printf("De cuantos cuerpos se compone su sistema?: "); //CANT DE CUERPOS DE UN SISTEMA
-            scanf("%d",&cantsis);
             switch (opcion)
             {
                 case (1):
                   int largoiz,largode;
-                  printf("De cuantos cuerpos se compone su sistema?: "); //CANT DE CUERPOS DE UN SISTEMA
-                  scanf("%d",&cantsis);
-                  if (cantsis<=0)
+                  printf("Cuantas fuerzas estan presente hacia la izquierda (segun su DCL): ");
+                  scanf("%d",&largoiz);
+                  if (largoiz<0)
                   {
-                    printf("Ingrese un valor valido la proxima");
+                    printf("\nIngrese un valor valido la proxima");
+                    return;
                   }
-                  for (int k=0;k<cantsis;k++)
+                  long double *izq=malloc(largoiz*sizeof(long double));
+                  if (izq==NULL)
                   {
-                    printf("Cuantas fuerzas estan presente hacia la izquierda (segun su DCL)");
-                    scanf("%d",&largoiz);
-                    long double *izq=malloc(largoiz*sizeof(long double));
-                    if (izq==NULL)
-                    {
-                        printf("ERROR DE MEMORIA\n");
-                        exit(EXIT_FAILURE);
-                    }
-                    for (int i=0;i<largoiz;i++)
-                    {
-                        
-                    }
-                    printf("Cuantas fuerzas estan presente hacia la derecha (segun su DCL)");
-                    scanf("%d",largode);
-                    long double *der=malloc(largode*sizeof(long double));
-                    if (der==NULL)
-                    {
-                        printf("ERROR DE MEMORIA\n");
-                        exit(EXIT_FAILURE);
-                    }
-                    for (int i=0;i<largode;i++)
-                    {
-                        
-                    }
+                      printf("ERROR DE MEMORIA\n");
+                      exit(EXIT_FAILURE);
+                  }
+                  for (int i=0;i<largoiz;i++)
+                  {
+                      printf("Ingrese fuerza izquierda %[]")
+                  }
+                  printf("Cuantas fuerzas estan presente hacia la derecha (segun su DCL)");
+                  scanf("%d",largode);
+                  long double *der=malloc(largode*sizeof(long double));
+                  if (der==NULL)
+                  {
+                      printf("ERROR DE MEMORIA\n");
+                      exit(EXIT_FAILURE);
+                  }
+                  for (int i=0;i<largode;i++)
+                  {
+                      
+                  }
+                  printf("Ingrese la masa del objeto: ")
+                  scanf("%Lf",&masa);
                     
                   }
                   break;
@@ -352,7 +355,7 @@ void cineodina()
                   h
                 case (4):
                   h
-                break;
+                  break;
             }
         }
 
@@ -608,7 +611,7 @@ void regresl()
             {
                 printf("\nIngrese el valor y%d:",i+1);
             }
-            scanf("%lf",&matriz[i][j]);
+            scanf("%Lf",&matriz[i][j]);
             if (j==0)
             {
                 sumatx+=matriz[i][j];
@@ -647,7 +650,7 @@ void tendisp()
     long double vector[cantdatos],copia[cantdatos];
     for (int i=0;i<cantdatos;i++)
     {
-        scanf("%lf",&vector[i]);
+        scanf("%Lf",&vector[i]);
         promx+=vector[i];
     }
     promx=promx/cantdatos;
